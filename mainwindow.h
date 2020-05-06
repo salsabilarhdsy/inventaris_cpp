@@ -2,6 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDialog>
+#include <QDebug>
+#include <QtSql>
+#include <QFileInfo>
+#include <QMessageBox>
+#include "halaman_admin.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -12,10 +19,16 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(QWidget *parent = 0);
+        ~MainWindow();
+
+private slots:
+    void on_pushButton_Login_clicked();
 
 private:
     Ui::MainWindow *ui;
+    QSqlDatabase myDB;
+    halaman_admin *halamanadmin;
+
 };
 #endif // MAINWINDOW_H
