@@ -7,7 +7,7 @@
 #include <QtSql>
 #include <QFileInfo>
 #include <QMessageBox>
-#include "halaman_admin.h"
+
 
 
 QT_BEGIN_NAMESPACE
@@ -19,6 +19,26 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    QSqlDatabase myDB;
+    void connClose()
+    {
+        myDB.close();
+        myDB.removeDatabase(QSqlDatabase::defaultConnection);
+    }
+    bool connOpen()
+    {
+            myDB = QSqlDatabase::addDatabase("QSQLITE");
+            myDB.setDatabaseName("D:/inventaris/inventaris.db");
+            if(!myDB.open()){
+                qDebug() << "No Connection to Database";
+                return false;
+            }else{
+                qDebug() << "Database connected";
+                return true;
+            }
+    }
+
+public:
     explicit MainWindow(QWidget *parent = 0);
         ~MainWindow();
 
@@ -27,8 +47,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QSqlDatabase myDB;
-    halaman_admin *halamanadmin;
+
 
 };
 #endif // MAINWINDOW_H

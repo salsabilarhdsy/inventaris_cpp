@@ -15,8 +15,12 @@ public:
     explicit halaman_admin(QWidget *parent = nullptr);
     ~halaman_admin();
 
+private slots:
+    void on_actionSupplier_triggered();
+
 private:
     Ui::halaman_admin *ui;
+
 };
 
 #endif // HALAMAN_ADMIN_H

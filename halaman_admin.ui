@@ -25,12 +25,20 @@
    </property>
    <widget class="QMenu" name="menujxnjs">
     <property name="title">
-     <string>jxnjs</string>
+     <string>Master</string>
     </property>
+    <addaction name="separator"/>
+    <addaction name="actionSupplier"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menujxnjs"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSupplier">
+   <property name="text">
+    <string>Supplier</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

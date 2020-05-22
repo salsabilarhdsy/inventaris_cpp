@@ -18,15 +18,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     halaman_admin.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    supplier.cpp
 
 HEADERS += \
     halaman_admin.h \
-    mainwindow.h
+    mainwindow.h \
+    supplier.h
 
 FORMS += \
     halaman_admin.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    supplier.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
