@@ -21,6 +21,7 @@ supplier::supplier(QWidget *parent) :
     connect(ui->txt_alamat, SIGNAL(textChanged(const QString&)), SLOT(checkLineEdits()));
     connect(ui->txt_kota, SIGNAL(textChanged(const QString&)), SLOT(checkLineEdits()));
     connect(ui->txt_telp, SIGNAL(textChanged(const QString&)), SLOT(checkLineEdits()));
+    connect(ui->txt_cari, SIGNAL(textChanged(const QString&)), SLOT(cari()));
 
     MainWindow conn;
     conn.connOpen();
@@ -220,7 +221,28 @@ void supplier::refresh()
     }
 }
 
-void supplier::on_pushButton_cari_clicked()
-{
 
+void supplier::cari()
+{
+    kw = ui->txt_cari->text();
+    MainWindow conn;
+    conn.connOpen();
+    if (!kw.isEmpty())
+    {
+        QSqlQuery *qry=new QSqlQuery (conn.myDB);
+        qry->prepare("select * from supplier where kode_supp='"+kw+"' or nama_supp='"+kw+"' or alamat='"+kw+"' or kota='"+kw+"' or telp='"+kw+"' ");
+        qry->exec();
+        modal->setQuery(*qry);
+        ui->tableView->setModel(modal);
+        conn.connClose();
+        qDebug() << (modal->rowCount());
+    }else{
+        QSqlQuery *qry=new QSqlQuery (conn.myDB);
+        qry->prepare("select * from supplier");
+        qry->exec();
+        modal->setQuery(*qry);
+        ui->tableView->setModel(modal);
+        conn.connClose();
+        qDebug() << (modal->rowCount());
+    }
 }

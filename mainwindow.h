@@ -23,7 +23,7 @@ public:
     void connClose()
     {
         myDB.close();
-        myDB.removeDatabase(QSqlDatabase::defaultConnection);
+        myDB.removeDatabase("D:/inventaris/inventaris.db");
     }
     bool connOpen()
     {

@@ -45,6 +45,9 @@ private slots:
 
     void on_pushButton_cari_clicked();
 
+    void on_txt_cari_textChanged(const QString &arg1);
+    void cari();
+
 private:
     Ui::supplier *ui;
 
