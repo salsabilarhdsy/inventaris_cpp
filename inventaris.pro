@@ -16,19 +16,34 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    barang_keluar.cpp \
+    barang_masuk.cpp \
+    barang_stok.cpp \
+    databarang.cpp \
     halaman_admin.cpp \
     main.cpp \
     mainwindow.cpp \
+    peminjaman_barang.cpp \
     supplier.cpp
 
 HEADERS += \
+    barang_keluar.h \
+    barang_masuk.h \
+    barang_stok.h \
+    databarang.h \
     halaman_admin.h \
     mainwindow.h \
+    peminjaman_barang.h \
     supplier.h
 
 FORMS += \
+    barang_keluar.ui \
+    barang_masuk.ui \
+    barang_stok.ui \
+    databarang.ui \
     halaman_admin.ui \
     mainwindow.ui \
+    peminjaman_barang.ui \
     supplier.ui
 
 # Default rules for deployment.

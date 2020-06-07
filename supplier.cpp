@@ -109,6 +109,9 @@ void supplier::on_pushButton_save_clicked()
     qry.prepare("insert into supplier (nama_supp, alamat, kota, telp) values ('"+nama+"', '"+alamat+"', '"+kota+"', '"+telp+"')");
     if (qry.exec())
     {
+        //clear LineEdits
+        refresh();
+
         //update table
         QSqlQuery *qry=new QSqlQuery (conn.myDB);
         qry->prepare("select * from supplier");
@@ -120,12 +123,6 @@ void supplier::on_pushButton_save_clicked()
 
         //messagebox:berhasil
         QMessageBox::information(this, tr("Save"), tr("Berhasil disimpan"));
-
-        //clear LineEdits
-        foreach(QLineEdit* le, findChildren<QLineEdit*>())
-        {
-           le->clear();
-        }
 
         conn.connClose();
     }

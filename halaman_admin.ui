@@ -28,15 +28,66 @@
      <string>Master</string>
     </property>
     <addaction name="separator"/>
+    <addaction name="actionBarang"/>
+    <addaction name="separator"/>
     <addaction name="actionSupplier"/>
     <addaction name="separator"/>
+    <addaction name="actionStok_Barang"/>
+   </widget>
+   <widget class="QMenu" name="menuAplikasi">
+    <property name="title">
+     <string>Aplikasi</string>
+    </property>
+    <addaction name="actionKeluar"/>
+   </widget>
+   <widget class="QMenu" name="menuTransaksi">
+    <property name="title">
+     <string>Transaksi</string>
+    </property>
+    <addaction name="actionBarang_Masuk"/>
+    <addaction name="separator"/>
+    <addaction name="actionBarang_Keluar"/>
+    <addaction name="separator"/>
+    <addaction name="actionPeminjaman_Barang"/>
    </widget>
    <addaction name="menujxnjs"/>
+   <addaction name="menuTransaksi"/>
+   <addaction name="menuAplikasi"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionSupplier">
    <property name="text">
     <string>Supplier</string>
+   </property>
+  </action>
+  <action name="actionKeluar">
+   <property name="text">
+    <string>Keluar</string>
+   </property>
+  </action>
+  <action name="actionBarang">
+   <property name="text">
+    <string>Barang</string>
+   </property>
+  </action>
+  <action name="actionBarang_Masuk">
+   <property name="text">
+    <string>Barang Masuk</string>
+   </property>
+  </action>
+  <action name="actionBarang_Keluar">
+   <property name="text">
+    <string>Barang Keluar</string>
+   </property>
+  </action>
+  <action name="actionPeminjaman_Barang">
+   <property name="text">
+    <string>Peminjaman Barang</string>
+   </property>
+  </action>
+  <action name="actionStok_Barang">
+   <property name="text">
+    <string>Stok Barang</string>
    </property>
   </action>
  </widget>

@@ -4,8 +4,8 @@
 #include <QSettings>
 #include <QSqlQueryModel>
 
-QSqlQueryModel *modal=new QSqlQueryModel ();
-QString kw, id_barang, nama_barang, spesifikasi, sumber_dana, kategori;
+QSqlQueryModel *modal_brg=new QSqlQueryModel ();
+QString kwd, id_barang, nama_barang, spesifikasi, sumber_dana, kategori;
 
 databarang::databarang(QWidget *parent) :
     QDialog(parent),
@@ -28,10 +28,10 @@ databarang::databarang(QWidget *parent) :
     QSqlQuery *qry=new QSqlQuery (conn.myDB);
     qry->prepare("select * from databarang");
     qry->exec();
-    modal->setQuery(*qry);
-    ui->tableView->setModel(modal);
+    modal_brg->setQuery(*qry);
+    ui->tableView->setModel(modal_brg);
     conn.connClose();
-    qDebug() << (modal->rowCount());
+    qDebug() << (modal_brg->rowCount());
 
 }
 
@@ -109,23 +109,20 @@ void databarang::on_pushButton_save_clicked()
     qry.prepare("update databarang set nama_barang='"+nama_barang+"', spesifikasi='"+spesifikasi+"', sumber_dana='"+sumber_dana+"', kategori='"+kategori+"' where kode_supp='"+id_barang+"'");
     if (qry.exec())
     {
+        //clear LineEdits
+        refresh();
+
         //update table
         QSqlQuery *qry=new QSqlQuery (conn.myDB);
         qry->prepare("select * from databarang");
         qry->exec();
-        modal->setQuery(*qry);
-        ui->tableView->setModel(modal);
+        modal_brg->setQuery(*qry);
+        ui->tableView->setModel(modal_brg);
         conn.connClose();
-        qDebug() << (modal->rowCount());
+        qDebug() << (modal_brg->rowCount());
 
         //messagebox:berhasil
         QMessageBox::information(this, tr("Save"), tr("Berhasil disimpan"));
-
-        //clear LineEdits
-        foreach(QLineEdit* le, findChildren<QLineEdit*>())
-        {
-           le->clear();
-        }
 
         conn.connClose();
     }
@@ -154,10 +151,10 @@ void databarang::on_pushButton_edit_clicked()
         QSqlQuery *qry=new QSqlQuery (conn.myDB);
         qry->prepare("select * from databarang");
         qry->exec();
-        modal->setQuery(*qry);
-        ui->tableView->setModel(modal);
+        modal_brg->setQuery(*qry);
+        ui->tableView->setModel(modal_brg);
         conn.connClose();
-        qDebug() << (modal->rowCount());
+        qDebug() << (modal_brg->rowCount());
 
         //messagebox:berhasil
         QMessageBox::information(this, tr("Update"), tr("Berhasil diubah"));
@@ -193,10 +190,10 @@ void databarang::on_pushButton_delete_clicked()
         QSqlQuery *qry=new QSqlQuery (conn.myDB);
         qry->prepare("select * from databarang");
         qry->exec();
-        modal->setQuery(*qry);
-        ui->tableView->setModel(modal);
+        modal_brg->setQuery(*qry);
+        ui->tableView->setModel(modal_brg);
         conn.connClose();
-        qDebug() << (modal->rowCount());
+        qDebug() << (modal_brg->rowCount());
 
         //messagebox:berhasil
         QMessageBox::information(this, tr("Delete"), tr("Berhasil dihapus"));
@@ -224,25 +221,25 @@ void databarang::refresh()
 
 void databarang::cari()
 {
-    kw = ui->txt_cari->text();
+    kwd = ui->txt_cari->text();
     MainWindow conn;
     conn.connOpen();
-    if (!kw.isEmpty())
+    if (!kwd.isEmpty())
     {
         QSqlQuery *qry=new QSqlQuery (conn.myDB);
-        qry->prepare("select * from databarang where kode_supp='"+kw+"' or nama_barang='"+kw+"' or spesifikasi='"+kw+"' or sumber_dana='"+kw+"' or kategori='"+kw+"' ");
+        qry->prepare("select * from databarang where kode_supp='"+kwd+"' or nama_barang='"+kwd+"' or spesifikasi='"+kwd+"' or sumber_dana='"+kwd+"' or kategori='"+kwd+"' ");
         qry->exec();
-        modal->setQuery(*qry);
-        ui->tableView->setModel(modal);
+        modal_brg->setQuery(*qry);
+        ui->tableView->setModel(modal_brg);
         conn.connClose();
-        qDebug() << (modal->rowCount());
+        qDebug() << (modal_brg->rowCount());
     }else{
         QSqlQuery *qry=new QSqlQuery (conn.myDB);
         qry->prepare("select * from databarang");
         qry->exec();
-        modal->setQuery(*qry);
-        ui->tableView->setModel(modal);
+        modal_brg->setQuery(*qry);
+        ui->tableView->setModel(modal_brg);
         conn.connClose();
-        qDebug() << (modal->rowCount());
+        qDebug() << (modal_brg->rowCount());
     }
 }

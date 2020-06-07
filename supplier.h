@@ -23,6 +23,7 @@ public:
     explicit supplier(QWidget *parent = nullptr);
     ~supplier();
 
+
 private slots:
 
 
@@ -38,13 +39,6 @@ private slots:
     void on_pushButton_refresh_clicked();
 
     void on_pushButton_delete_clicked();
-
-    void on_pushButton_5_clicked();
-
-    void on_pushButton_refreshTable_clicked();
-
-    void on_pushButton_cari_clicked();
-
     void on_txt_cari_textChanged(const QString &arg1);
     void cari();
 

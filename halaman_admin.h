@@ -18,6 +18,16 @@ public:
 private slots:
     void on_actionSupplier_triggered();
 
+    void on_actionBarang_Masuk_triggered();
+
+    void on_actionStok_Barang_triggered();
+
+    void on_actionPeminjaman_Barang_triggered();
+
+    void on_actionBarang_Keluar_triggered();
+
+    void on_actionBarang_triggered();
+
 private:
     Ui::halaman_admin *ui;
 
