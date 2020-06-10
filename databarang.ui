@@ -32,25 +32,6 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txt_spek">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>140</y>
-     <width>161</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="placeholderText">
-    <string/>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton_save">
    <property name="geometry">
     <rect>
@@ -210,26 +191,6 @@
     <string>Cari disini.</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txt_sumber">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>110</y>
-     <width>171</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="txt_kategori">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>140</y>
-     <width>171</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -247,6 +208,65 @@
    </property>
    <property name="text">
     <string>DATA BARANG</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="box_sumber">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>110</y>
+     <width>171</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>BOS</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Sekolah</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="box_kategori">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>140</y>
+     <width>171</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Baru</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Lama</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLineEdit" name="txt_spek">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>140</y>
+     <width>161</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="placeholderText">
+    <string/>
    </property>
   </widget>
  </widget>
