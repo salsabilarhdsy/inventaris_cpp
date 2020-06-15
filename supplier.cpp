@@ -47,7 +47,7 @@ void supplier::on_tableView_activated(const QModelIndex &index)
     MainWindow conn;
     conn.connOpen();
     QSqlQuery qry;
-    qry.prepare("select * from supplier where kode_supp='"+val+"' or nama_supp='"+val+"' or alamat='"+val+"' or kota='"+val+"' or telp='"+val+"' ");
+    qry.prepare("select * from supplier where kode_supp='"+val+"'");
 
     if(qry.exec())
     {

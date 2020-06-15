@@ -23,7 +23,7 @@ SOURCES += \
     halaman_admin.cpp \
     main.cpp \
     mainwindow.cpp \
-    peminjaman_barang.cpp \
+    pinjam_barang.cpp \
     supplier.cpp
 
 HEADERS += \
@@ -33,7 +33,7 @@ HEADERS += \
     databarang.h \
     halaman_admin.h \
     mainwindow.h \
-    peminjaman_barang.h \
+    pinjam_barang.h \
     supplier.h
 
 FORMS += \
@@ -43,7 +43,7 @@ FORMS += \
     databarang.ui \
     halaman_admin.ui \
     mainwindow.ui \
-    peminjaman_barang.ui \
+    pinjam_barang.ui \
     supplier.ui
 
 # Default rules for deployment.

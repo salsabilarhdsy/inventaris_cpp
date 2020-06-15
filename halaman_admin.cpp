@@ -4,9 +4,9 @@
 #include "barang_masuk.h"
 #include "barang_keluar.h"
 #include "barang_stok.h"
-#include "peminjaman_barang.h"
+#include "pinjam_barang.h"
 #include "databarang.h"
-
+#include "mainwindow.h"
 
 halaman_admin::halaman_admin(QWidget *parent) :
     QMainWindow(parent),
@@ -43,8 +43,8 @@ void halaman_admin::on_actionStok_Barang_triggered()
 
 void halaman_admin::on_actionPeminjaman_Barang_triggered()
 {
-    peminjaman_barang *pinjam_brg;
-    pinjam_brg =new peminjaman_barang(this);
+    pinjam_barang *pinjam_brg;
+    pinjam_brg =new pinjam_barang(this);
     pinjam_brg->show();
 }
 
@@ -60,4 +60,13 @@ void halaman_admin::on_actionBarang_triggered()
     databarang *databrg;
     databrg =new databarang(this);
     databrg->show();
+}
+
+void halaman_admin::on_actionKeluar_triggered()
+{
+    this->close();
+    MainWindow *login;
+    login =new MainWindow(this);
+    login->show();
+
 }

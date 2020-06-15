@@ -30,7 +30,7 @@ barang_keluar::barang_keluar(QWidget *parent) :
     MainWindow conn;
     conn.connOpen();
     QSqlQuery *qry=new QSqlQuery (conn.myDB);
-    qry->prepare("select * from masuk_brg");
+    qry->prepare("select * from keluar_brg");
     qry->exec();
     keluar_brg->setQuery(*qry);
     ui->tableView->setModel(keluar_brg);

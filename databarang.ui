@@ -11,14 +11,14 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Data Barang</string>
   </property>
   <widget class="QLineEdit" name="txt_nama">
    <property name="geometry">
     <rect>
      <x>120</x>
      <y>110</y>
-     <width>161</width>
+     <width>201</width>
      <height>20</height>
     </rect>
    </property>
@@ -35,8 +35,8 @@
   <widget class="QPushButton" name="pushButton_save">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>180</y>
+     <x>520</x>
+     <y>240</y>
      <width>71</width>
      <height>23</height>
     </rect>
@@ -48,8 +48,8 @@
   <widget class="QPushButton" name="pushButton_edit">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>180</y>
+     <x>440</x>
+     <y>240</y>
      <width>71</width>
      <height>23</height>
     </rect>
@@ -100,8 +100,8 @@
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>330</x>
-     <y>140</y>
+     <x>340</x>
+     <y>170</y>
      <width>47</width>
      <height>14</height>
     </rect>
@@ -113,8 +113,8 @@
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>330</x>
-     <y>110</y>
+     <x>340</x>
+     <y>140</y>
      <width>71</width>
      <height>16</height>
     </rect>
@@ -126,9 +126,9 @@
   <widget class="QTableView" name="tableView">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>270</y>
-     <width>541</width>
+     <x>30</x>
+     <y>300</y>
+     <width>561</width>
      <height>192</height>
     </rect>
    </property>
@@ -136,8 +136,8 @@
   <widget class="QPushButton" name="pushButton_delete">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>180</y>
+     <x>360</x>
+     <y>240</y>
      <width>71</width>
      <height>23</height>
     </rect>
@@ -149,8 +149,8 @@
   <widget class="QPushButton" name="pushButton_refresh">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>180</y>
+     <x>280</x>
+     <y>240</y>
      <width>71</width>
      <height>23</height>
     </rect>
@@ -175,8 +175,8 @@
   <widget class="QLineEdit" name="txt_cari">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>240</y>
+     <x>280</x>
+     <y>270</y>
      <width>311</width>
      <height>20</height>
     </rect>
@@ -210,52 +210,73 @@
     <string>DATA BARANG</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="box_sumber">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>110</y>
-     <width>171</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>BOS</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Sekolah</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QComboBox" name="box_kategori">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>140</y>
-     <width>171</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>Baru</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Lama</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QLineEdit" name="txt_spek">
+  <widget class="QTextEdit" name="txt_spek">
    <property name="geometry">
     <rect>
      <x>120</x>
      <y>140</y>
-     <width>161</width>
+     <width>201</width>
+     <height>71</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>110</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Lokasi Barang</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txt_lokasi">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>110</y>
+     <width>171</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="placeholderText">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txt_dana">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>140</y>
+     <width>171</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="placeholderText">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txt_kategori">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>170</y>
+     <width>171</width>
      <height>20</height>
     </rect>
    </property>

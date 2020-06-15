@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>740</width>
-    <height>570</height>
+    <width>730</width>
+    <height>639</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Barang Keluar</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -129,8 +129,8 @@
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>90</y>
+     <x>20</x>
+     <y>220</y>
      <width>81</width>
      <height>16</height>
     </rect>
@@ -142,8 +142,8 @@
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>120</y>
+     <x>20</x>
+     <y>250</y>
      <width>71</width>
      <height>16</height>
     </rect>
@@ -156,7 +156,7 @@
    <property name="geometry">
     <rect>
      <x>400</x>
-     <y>150</y>
+     <y>90</y>
      <width>71</width>
      <height>16</height>
     </rect>
@@ -169,7 +169,7 @@
    <property name="geometry">
     <rect>
      <x>400</x>
-     <y>180</y>
+     <y>120</y>
      <width>71</width>
      <height>16</height>
     </rect>
@@ -181,9 +181,9 @@
   <widget class="QDateEdit" name="txt_tgl">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>90</y>
-     <width>211</width>
+     <x>110</x>
+     <y>220</y>
+     <width>221</width>
      <height>22</height>
     </rect>
    </property>
@@ -191,9 +191,9 @@
   <widget class="QSpinBox" name="txt_jml">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>120</y>
-     <width>211</width>
+     <x>110</x>
+     <y>250</y>
+     <width>221</width>
      <height>22</height>
     </rect>
    </property>
@@ -202,7 +202,7 @@
    <property name="geometry">
     <rect>
      <x>500</x>
-     <y>150</y>
+     <y>90</y>
      <width>211</width>
      <height>20</height>
     </rect>
@@ -215,7 +215,7 @@
    <property name="geometry">
     <rect>
      <x>500</x>
-     <y>180</y>
+     <y>120</y>
      <width>211</width>
      <height>20</height>
     </rect>
@@ -228,7 +228,7 @@
    <property name="geometry">
     <rect>
      <x>400</x>
-     <y>210</y>
+     <y>250</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -241,7 +241,7 @@
    <property name="geometry">
     <rect>
      <x>480</x>
-     <y>210</y>
+     <y>250</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -254,7 +254,7 @@
    <property name="geometry">
     <rect>
      <x>560</x>
-     <y>210</y>
+     <y>250</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -267,7 +267,7 @@
    <property name="geometry">
     <rect>
      <x>640</x>
-     <y>210</y>
+     <y>250</y>
      <width>71</width>
      <height>23</height>
     </rect>
@@ -280,7 +280,7 @@
    <property name="geometry">
     <rect>
      <x>400</x>
-     <y>240</y>
+     <y>290</y>
      <width>311</width>
      <height>20</height>
     </rect>
@@ -293,7 +293,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>280</y>
+     <y>320</y>
      <width>691</width>
      <height>291</height>
     </rect>
@@ -310,6 +310,64 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_10">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>150</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Penerima</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txt_namasupp_2">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>150</y>
+     <width>211</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="txt_spesifikasi_2">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>180</y>
+     <width>211</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>180</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Keperluan</string>
    </property>
   </widget>
  </widget>

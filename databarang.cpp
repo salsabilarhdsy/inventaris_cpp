@@ -5,7 +5,7 @@
 #include <QSqlQueryModel>
 
 QSqlQueryModel *Barang=new QSqlQueryModel ();
-QString kwd, kode_brg, nama_brg, spesifikasi, sumber_dana, kategori;
+QString kwd, kode_brg, nama_brg, spesifikasi, sumber_dana, kategori, lokasi;
 
 databarang::databarang(QWidget *parent) :
     QDialog(parent),
@@ -19,14 +19,15 @@ databarang::databarang(QWidget *parent) :
 
     connect(ui->txt_nama, SIGNAL(textChanged(const QString&)), SLOT(checkLineEdits()));
     connect(ui->txt_spek, SIGNAL(textChanged(const QString&)), SLOT(checkLineEdits()));
-    connect(ui->box_sumber, SIGNAL(textChanged(const QString&)), SLOT(checkLineEdits()));
-    connect(ui->box_kategori, SIGNAL(textChanged(const QString&)), SLOT(checkLineEdits()));
+    connect(ui->txt_lokasi, SIGNAL(textChanged(const QString&)), SLOT(checkLineEdits()));
+    connect(ui->txt_dana, SIGNAL(textChanged(const QString&)), SLOT(checkLineEdits()));
+    connect(ui->txt_kategori, SIGNAL(textChanged(const QString&)), SLOT(checkLineEdits()));
     connect(ui->txt_cari, SIGNAL(textChanged(const QString&)), SLOT(cari()));
 
     MainWindow conn;
     conn.connOpen();
     QSqlQuery *qry=new QSqlQuery (conn.myDB);
-    qry->prepare("select * from databarang");
+    qry->prepare("select kode_brg, nama_brg, spesifikasi, kategori, lokasi_brg, sumber_dana from barang");
     qry->exec();
     Barang->setQuery(*qry);
     ui->tableView->setModel(Barang);
@@ -47,17 +48,18 @@ void databarang::on_tableView_activated(const QModelIndex &index)
     MainWindow conn;
     conn.connOpen();
     QSqlQuery qry;
-    qry.prepare("select * from databarang where kode_brg='"+val+"' or nama_brg='"+val+"' or spesifikasi='"+val+"' or sumber_dana='"+val+"' or kategori='"+val+"' ");
+    qry.prepare("select * from barang where kode_brg='"+val+"'");
 
     if(qry.exec())
     {
         while(qry.next())
         {
-        ui->txt_id->setText(qry.value(0).toString());
-        ui->txt_nama->setText(qry.value(1).toString());
-        ui->txt_spek->setText(qry.value(2).toString());
-        ui->box_sumber->setCurrentText(qry.value(3).toString());
-        ui->box_kategori->setCurrentText(qry.value(4).toString());
+            ui->txt_id->setText(qry.value(0).toString());
+            ui->txt_nama->setText(qry.value(1).toString());
+            ui->txt_spek->setText(qry.value(2).toString());
+            ui->txt_kategori->setText(qry.value(3).toString());
+            ui->txt_lokasi->setText(qry.value(4).toString());
+            ui->txt_dana->setText(qry.value(5).toString());
         }
         conn.connClose();
     }
@@ -73,7 +75,7 @@ void databarang::checkLineEdits()
     if (!ui->txt_id->text().isEmpty())
     {
         ui->pushButton_delete->setEnabled(true);
-        if(!ui->txt_spek->text().isEmpty() && !ui->box_sumber->currentText().isEmpty() && !ui->box_kategori->currentText().isEmpty())
+        if(!ui->txt_nama->text().isEmpty() && !ui->txt_spek->toPlainText().isEmpty() && !ui->txt_lokasi->text().isEmpty() && !ui->txt_dana->text().isEmpty() && !ui->txt_kategori->text().isEmpty())
         {
             ui->pushButton_edit->setEnabled(true);
         }else
@@ -85,7 +87,7 @@ void databarang::checkLineEdits()
         ui->pushButton_delete->setEnabled(false);
         ui->pushButton_edit->setEnabled(false);
 
-        if(!ui->txt_spek->text().isEmpty() && !ui->box_sumber->currentText().isEmpty() && !ui->box_kategori->currentText().isEmpty())
+        if(!ui->txt_nama->text().isEmpty() && !ui->txt_spek->toPlainText().isEmpty() && !ui->txt_lokasi->text().isEmpty() && !ui->txt_dana->text().isEmpty() && !ui->txt_kategori->text().isEmpty())
         {
             ui->pushButton_save->setEnabled(true);
         }else
@@ -99,14 +101,15 @@ void databarang::checkLineEdits()
 void databarang::on_pushButton_save_clicked()
 {
     nama_brg = ui->txt_nama->text();
-    spesifikasi = ui->txt_spek->text();
-    sumber_dana = ui->box_sumber->currentText();
-    kategori = ui->box_kategori->currentText();
+    spesifikasi = ui->txt_spek->toPlainText();
+    sumber_dana = ui->txt_dana->text();
+    kategori = ui->txt_kategori->text();
+    lokasi = ui->txt_lokasi->text();
 
     MainWindow conn;
     conn.connOpen();
     QSqlQuery qry;
-   qry.prepare("insert into databarang (nama_brg, spesifikasi, sumber_dana, kategori) values (\'"+nama_brg+"', \'"+spesifikasi+"', \'"+sumber_dana+"', \'"+kategori+"')");
+   qry.prepare("insert into barang (nama_brg, spesifikasi, kategori, lokasi_brg, sumber_dana, stok) values ('"+nama_brg+"', '"+spesifikasi+"', '"+kategori+"', '"+lokasi+"', '"+sumber_dana+"', 0)");
     if (qry.exec())
     {
         //clear LineEdits
@@ -114,7 +117,7 @@ void databarang::on_pushButton_save_clicked()
 
         //update table
         QSqlQuery *qry=new QSqlQuery (conn.myDB);
-        qry->prepare("select * from databarang");
+        qry->prepare("select kode_brg, nama_brg, spesifikasi, kategori, lokasi_brg, sumber_dana from barang");
         qry->exec();
         Barang->setQuery(*qry);
         ui->tableView->setModel(Barang);
@@ -135,20 +138,22 @@ void databarang::on_pushButton_save_clicked()
 
 void databarang::on_pushButton_edit_clicked()
 {
+    kode_brg = ui->txt_id->text();
     nama_brg = ui->txt_nama->text();
-    spesifikasi = ui->txt_spek->text();
-    sumber_dana = ui->box_sumber->currentText();
-    kategori = ui->box_kategori->currentText();
+    spesifikasi = ui->txt_spek->toPlainText();
+    sumber_dana = ui->txt_dana->text();
+    kategori = ui->txt_kategori->text();
+    lokasi = ui->txt_lokasi->text();
 
     MainWindow conn;
     conn.connOpen();
     QSqlQuery qry;
-    qry.prepare("update databarang set nama_brg='"+nama_brg+"', spesifikasi='"+spesifikasi+"', sumber_dana='"+sumber_dana+"', kategori='"+kategori+"' where kode_brg='"+kode_brg+"'");
+    qry.prepare("update barang set nama_brg='"+nama_brg+"', spesifikasi='"+spesifikasi+"', lokasi_brg='"+lokasi+"', sumber_dana='"+sumber_dana+"', kategori='"+kategori+"' where kode_brg='"+kode_brg+"'");
     if (qry.exec())
     {
         //update table
         QSqlQuery *qry=new QSqlQuery (conn.myDB);
-        qry->prepare("select * from databarang");
+        qry->prepare("select kode_brg, nama_brg, spesifikasi, kategori, lokasi_brg, sumber_dana from barang");
         qry->exec();
         Barang->setQuery(*qry);
         ui->tableView->setModel(Barang);
@@ -182,12 +187,12 @@ void databarang::on_pushButton_delete_clicked()
     MainWindow conn;
     conn.connOpen();
     QSqlQuery qry;
-    qry.prepare("delete from databarang where kode_supp='"+kode_brg+"'");
+    qry.prepare("delete from barang where kode_brg='"+kode_brg+"'");
     if (qry.exec())
     {
         //update table
         QSqlQuery *qry=new QSqlQuery (conn.myDB);
-        qry->prepare("select * from databarang");
+        qry->prepare("select kode_brg, nama_brg, spesifikasi, kategori, lokasi_brg, sumber_dana from barang");
         qry->exec();
         Barang->setQuery(*qry);
         ui->tableView->setModel(Barang);
@@ -212,6 +217,7 @@ void databarang::on_pushButton_delete_clicked()
 void databarang::refresh()
 {
     ui->txt_id->clear();
+    ui->txt_spek->clear();
     foreach(QLineEdit* le, findChildren<QLineEdit*>()) {
        le->clear();
     }
@@ -226,7 +232,7 @@ void databarang::cari()
     if (!kwd.isEmpty())
     {
         QSqlQuery *qry=new QSqlQuery (conn.myDB);
-        qry->prepare("select * from databarang where kode_brg='"+kwd+"' or nama_brg='"+kwd+"' or spesifikasi='"+kwd+"' or sumber_dana='"+kwd+"' or kategori='"+kwd+"' ");
+        qry->prepare("select * from barang where kode_brg='"+kwd+"' or nama_brg='"+kwd+"' or lokasi_brg='"+kwd+"' or spesifikasi='"+kwd+"' or sumber_dana='"+kwd+"' or kategori='"+kwd+"' ");
         qry->exec();
         Barang->setQuery(*qry);
         ui->tableView->setModel(Barang);
@@ -234,7 +240,7 @@ void databarang::cari()
         qDebug() << (Barang->rowCount());
     }else{
         QSqlQuery *qry=new QSqlQuery (conn.myDB);
-        qry->prepare("select * from databarang");
+        qry->prepare("select kode_brg, nama_brg, spesifikasi, kategori, lokasi_brg, sumber_dana from barang");
         qry->exec();
         Barang->setQuery(*qry);
         ui->tableView->setModel(Barang);

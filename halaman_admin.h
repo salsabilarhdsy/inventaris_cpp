@@ -28,6 +28,8 @@ private slots:
 
     void on_actionBarang_triggered();
 
+    void on_actionKeluar_triggered();
+
 private:
     Ui::halaman_admin *ui;
 

@@ -47,10 +47,11 @@ barang_masuk::~barang_masuk()
 
 void barang_masuk::checkLineEdits()
 {
+    int jml = ui->txt_jml->value();
     if (!ui->txt_idmsk->text().isEmpty())
     {
         ui->pushButton_delete->setEnabled(true);
-        if(!ui->txt_idbrg->text().isEmpty() && !ui->txt_namabrg->text().isEmpty() && !ui->txt_spesifikasi->toPlainText().isEmpty() && !ui->txt_tgl->text().isEmpty() && !ui->txt_idsupp->text().isEmpty() && !ui->txt_namasupp->text().isEmpty())
+        if(jml!=0 && !ui->txt_idbrg->text().isEmpty() && !ui->txt_namabrg->text().isEmpty() && !ui->txt_spesifikasi->toPlainText().isEmpty() && !ui->txt_tgl->text().isEmpty() && !ui->txt_idsupp->text().isEmpty() && !ui->txt_namasupp->text().isEmpty())
         {
             ui->pushButton_update->setEnabled(true);
         }else
@@ -62,7 +63,7 @@ void barang_masuk::checkLineEdits()
         ui->pushButton_delete->setEnabled(false);
         ui->pushButton_update->setEnabled(false);
 
-        if(!ui->txt_idbrg->text().isEmpty() && !ui->txt_namabrg->text().isEmpty() && !ui->txt_spesifikasi->toPlainText().isEmpty() && !ui->txt_tgl->text().isEmpty() && !ui->txt_idsupp->text().isEmpty() && !ui->txt_namasupp->text().isEmpty())
+        if(jml!=0 && !ui->txt_idbrg->text().isEmpty() && !ui->txt_namabrg->text().isEmpty() && !ui->txt_spesifikasi->toPlainText().isEmpty() && !ui->txt_tgl->text().isEmpty() && !ui->txt_idsupp->text().isEmpty() && !ui->txt_namasupp->text().isEmpty())
         {
             ui->pushButton_save->setEnabled(true);
         }else
@@ -105,15 +106,18 @@ void barang_masuk::showBarang()
     MainWindow conn;
     conn.connOpen();
     QSqlQuery qry;
-    qry.prepare("select * from barang where kode_brg='"+kw+"'");
     if(!kw.isEmpty()){
+    qry.prepare("select * from barang where kode_brg='"+kw+"'");
         if (qry.exec())
         {
+            ui->txt_namabrg->clear();
+            ui->txt_spesifikasi->clear();
             while(qry.next())
             {
                 ui->txt_namabrg->setText(qry.value(1).toString());
                 ui->txt_spesifikasi->setText(qry.value(2).toString());
             }
+
             conn.connClose();
         }
     }else
@@ -135,6 +139,7 @@ void barang_masuk::showSupplier()
     {
         if (qry.exec())
             {
+                ui->txt_namasupp->clear();
                 while(qry.next())
                 {
                     ui->txt_namasupp->setText(qry.value(1).toString());
@@ -152,7 +157,6 @@ void barang_masuk::on_txt_jml_valueChanged(int arg1)
     if(arg1==0){
         ui->pushButton_update->setEnabled(false);
         ui->pushButton_save->setEnabled(false);
-        ui->pushButton_delete->setEnabled(false);
     }else{
         checkLineEdits();
     }
@@ -161,10 +165,10 @@ void barang_masuk::on_txt_jml_valueChanged(int arg1)
 void barang_masuk::refresh()
 {
     ui->txt_idmsk->clear();
-    ui->txt_jml->setValue(1);
     foreach(QLineEdit* le, findChildren<QLineEdit*>()) {
        le->clear();
     }
+    ui->txt_jml->setValue(1);
 }
 
 
@@ -187,8 +191,6 @@ void barang_masuk::on_pushButton_save_clicked()
     qry.prepare("insert into masuk_brg (kode_brg, tgl_masuk, jml_masuk, kode_supp) values ('"+idbrg+"', '"+tgl+"', '"+jml+"', '"+idsupp+"')");
     if (qry.exec())
     {
-        //clear LineEdits
-        refresh();
 
         //update table
         QSqlQuery *qry=new QSqlQuery (conn.myDB);
@@ -198,6 +200,9 @@ void barang_masuk::on_pushButton_save_clicked()
         ui->tableView->setModel(model);
         conn.connClose();
         qDebug() << (model->rowCount());
+
+        //clear LineEdits
+        refresh();
 
         //messagebox:berhasil
         QMessageBox::information(this, tr("Save"), tr("Berhasil disimpan"));
@@ -212,6 +217,7 @@ void barang_masuk::on_pushButton_save_clicked()
 
 void barang_masuk::on_pushButton_update_clicked()
 {
+    QString id = ui->txt_idmsk->text();
     idbrg = ui->txt_idbrg->text();
     tgl = ui->txt_tgl->text();
     jml = ui->txt_jml->text();
@@ -220,12 +226,12 @@ void barang_masuk::on_pushButton_update_clicked()
     MainWindow conn;
     conn.connOpen();
     QSqlQuery qry;
-    qry.prepare("update masuk_brg set kode_brg='"+idbrg+"', tgl_masuk='"+tgl+"', jml_masuk='"+jml+"', kode_supp'"+idsupp+"'");
+    qry.prepare("update masuk_brg set kode_brg='"+idbrg+"', tgl_masuk='"+tgl+"', jml_masuk='"+jml+"', kode_supp'"+idsupp+"' where id_masuk='"+id+"'");
     if (qry.exec())
     {
         //update table
         QSqlQuery *qry=new QSqlQuery (conn.myDB);
-        qry->prepare("select * from supplier");
+        qry->prepare("select * from masuk_brg");
         qry->exec();
         model->setQuery(*qry);
         ui->tableView->setModel(model);

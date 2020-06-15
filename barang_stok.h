@@ -23,6 +23,9 @@ public:
     explicit barang_stok(QWidget *parent = nullptr);
     ~barang_stok();
 
+private slots:
+    void cari();
+
 private:
     Ui::barang_stok *ui;
 };
